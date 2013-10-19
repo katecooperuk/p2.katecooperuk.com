@@ -5,7 +5,6 @@ class users_controller extends base_controller {
 
     public function __construct() {
         parent::__construct();
-        echo "users_controller construct called<br><br>";
     } 
 
     public function index() {
@@ -24,15 +23,13 @@ class users_controller extends base_controller {
         echo "This is the logout page";
     }
 
-    public function profile($user_name = NULL) {
+   public function profile($user_name = NULL) {
     
-    	if($user_name == NULL) {
-	    	echo "No user specified";
-    	}
-    	else {
-	    	echo "This is the profile for ".$user_name;
-    	}
-    }
-    
+    	$view = View::instance('v_users_profile');
+    	
+    	$view->user_name = $user_name;
+    	
+    	echo $view;
+    }    
     
 } # end of the class
