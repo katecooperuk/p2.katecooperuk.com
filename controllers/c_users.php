@@ -51,6 +51,7 @@ class users_controller extends base_controller {
     	
     	# Display the View
     	echo $this->template;
+    	
     }    
     
 } # end of the class
