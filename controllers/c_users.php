@@ -27,6 +27,7 @@ class users_controller extends base_controller {
     
     	# Set up the View
     	$this->template->content = View::instance('v_users_profile');
+    	$this->template->title = "Profile";
     	
     	# Pass the data to the view
     	$this->template->content->user_name = $user_name;
