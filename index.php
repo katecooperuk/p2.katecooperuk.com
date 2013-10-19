@@ -21,7 +21,7 @@
 # Bootstrap
 	require CORE_PATH."bootstrap.php";
 
-# Routing
+# Routing - rerouting to the index.php (controller: c_index.php)
 # You can use regexp, for example '/users/([A-Za-z0-9-\s\@]+)' => '/members/$0',
     Router::$routes = array(
     	'/' => '/index',     # default controller when "/" is requested
