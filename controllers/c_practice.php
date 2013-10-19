@@ -19,6 +19,12 @@ class practice_controller extends base_controller {
 			$imageObj->display();
 		
 		}
+		
+		public function test2() {
+		
+			# Static - accessing the method directly. A class where its methods you use independently e.g. User
+			echo Time::now();
+	}
 	
 	
 }
