@@ -52,6 +52,14 @@ class users_controller extends base_controller {
     	# Display the View
     	echo $this->template;
     	
+    	# Create instance of view
+    	//$view = View::instance('v_users_profile');
+    	
+    	# View has access to $user_name
+    	//$view->user_name = $user_name;
+    	
+    	//echo $view;
+    	
     }    
     
 } # end of the class
