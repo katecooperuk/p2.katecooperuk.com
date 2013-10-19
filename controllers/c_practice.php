@@ -5,9 +5,6 @@ class practice_controller extends base_controller {
 		
 			# access to class 
 			# N.B. with Auto-loading libraries, you don't need this 'require' as it looks for # 'Image'
-			
-			echo APP_PATH."<br>";
-			echo DOC_ROOT."<br>";
 		
 			# Test: localhost/practice/test1
 			require(APP_PATH.'/libraries/Image.php');
@@ -19,7 +16,7 @@ class practice_controller extends base_controller {
 			$imageObj->resize(200,200);
 
 			# display
-			//$imageObj->display();
+			$imageObj->display();
 		
 		}
 		
