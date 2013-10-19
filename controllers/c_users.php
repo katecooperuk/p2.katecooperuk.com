@@ -1,6 +1,8 @@
 <?php
 class users_controller extends base_controller {
 
+	#Testing localhost/users/signup
+
     public function __construct() {
         parent::__construct();
         echo "users_controller construct called<br><br>";
