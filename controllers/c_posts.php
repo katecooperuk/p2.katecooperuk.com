@@ -36,6 +36,22 @@ class posts_controller extends base_controller {
 	View All Posts
 	-------------------------------*/
 	public function index() {
+	
+	 	# Set up view
+	 	$this->template->content = View::instance('v_posts_index');
+		
+		# Set up Query
+		$q = 'SELECT *
+			FROM posts';
+			
+		# Run Query
+		$posts = DB::instance(DB_NAME)->select_rows($q);
+		
+		# Pass $posts array to the view
+		$this->template->content->posts = $posts;
+		
+		# Render view
+		echo $this->template;
 		
 	}
 	
