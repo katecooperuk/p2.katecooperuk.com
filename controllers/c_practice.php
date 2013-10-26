@@ -1,18 +1,38 @@
 <?php
 class practice_controller extends base_controller {
 	
-		/* Database Insert Test - N.B. Use double quotes "" */
+		/* DATABASE TESTS */
 		public function test_db() {
 			
+			# Runs through DB.php in core - puts Albert Einstein into users
+			/*	
 			$q = 'INSERT INTO users
 				SET first_name = "Albert",
 				last_name = "Einstein"';
 				
 			echo $q;
+			*/
 			
-			# Runs through DB.php in core - puts Albert Einstein into users
+			
+			# Runs through DB.php in core - adds email address
+			/*
+			$q = 'UPDATE users
+			SET email = "albert@aol.com"
+			WHERE first_name = "Albert"';
+			
+			echo $q;
+			
 			DB::instance(DB_NAME)->query($q);
+			*/
 			
+			# Using query builder
+			$new_user = Array(
+				'first_name' => 'Albert',
+				'last_name' => 'Einstein',
+				'email' => 'albert@gmail.com',
+			);
+				
+			DB::instance(DB_NAME)->insert('users',$new_user);
 		}
 		
 		/*  Demonstrating Classes/Objects */
@@ -35,11 +55,12 @@ class practice_controller extends base_controller {
 		
 		}
 		
+		/*  Demonstrating Timestamp */
 		public function test2() {
 		
-			# Static - accessing the method directly. A class where its methods you use independently e.g. User
+			# Static - accessing the method directly. A class where its methods you use independently e.g. 				User
 			echo Time::now();
-	}
+		}
 	
 	
 }
