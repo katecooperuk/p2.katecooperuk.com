@@ -1,5 +1,6 @@
 <?php foreach($posts as $post): ?>
 
-	<?=$post['content']?><br>
+	<strong><?=$post['first_name']?></strong><br>
+	<?=$post['content']?><br><br>
 	
 <?php endforeach; ?>
