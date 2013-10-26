@@ -58,6 +58,10 @@ class users_controller extends base_controller {
     
     public function p_login() {
 	    
+	    # Sanitize User
+	    $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+	    
+	    # Compare password to database
 	    $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 	    
 	    # Search the db for this email and password
@@ -72,21 +76,32 @@ class users_controller extends base_controller {
 	    
 	    $token = DB::instance(DB_NAME)->select_field($q);
 	    
-	    # Success
-	    if($token) {
-	    	setcookie('token', $token, strtotime('+1 year'), '/');
-	    	echo "You are logged in!";
+	    # Fail to find matching token
+	    if(!$token) {
+	    	
+	    	# Send back to login page
+	    	Router::redirect('/users/login/');
 		    
 	    }
-	    #Fail
+	    # Successful login
 	    else {
-	    	echo "Login failed!";
+	    	/* 
+			Store this token in a cookie using setcookie()
+			Important Note: *Nothing* else can echo to the page before setcookie is called
+			Not even one single white space.
+			param 1 = name of the cookie
+			param 2 = the value of the cookie
+			param 3 = when to expire
+			param 4 = the path of the cooke (a single forward slash sets it for the entire domain)
+			*/
+			setcookie('token', $token, strtotime('+1 year'), '/');
+			
+			# Send to main page
+			Router::redirect('/');
 		    
 	    }
 	    
-	    echo "<pre>";
-	    print_r($_POST);
-	    echo "<pre>";
+
     }
 
     public function logout() {
