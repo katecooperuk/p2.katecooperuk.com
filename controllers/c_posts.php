@@ -41,9 +41,14 @@ class posts_controller extends base_controller {
 	 	$this->template->content = View::instance('v_posts_index');
 		
 		# Set up Query
-		$q = 'SELECT *
-			FROM posts';
-			
+		$q = 'SELECT 
+					posts.*,
+					users.first_name,
+					users.last_name
+				FROM posts
+				INNER JOIN users				
+					ON posts.user_id = users.user_id';
+							
 		# Run Query
 		$posts = DB::instance(DB_NAME)->select_rows($q);
 		
