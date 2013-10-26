@@ -1,7 +1,9 @@
 <?php
 class practice_controller extends base_controller {
-	
-		/* DATABASE TESTS */
+
+		//========================
+		//! /* DATABASE TESTS */
+		//========================
 		public function test_db() {
 			
 			# Runs through DB.php in core - puts Albert Einstein into users
@@ -26,6 +28,7 @@ class practice_controller extends base_controller {
 			*/
 			
 			# Using query builder
+			/*
 			$new_user = Array(
 				'first_name' => 'Albert',
 				'last_name' => 'Einstein',
@@ -33,9 +36,25 @@ class practice_controller extends base_controller {
 			);
 				
 			DB::instance(DB_NAME)->insert('users',$new_user);
+			*/
+			
+			# POST example
+			$_POST['first_name'] = 'Albert';
+			
+			# Sanitizing POST
+			$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+			
+			$q = 'SELECT email
+				FROM users
+				WHERE first_name = "'.$_POST['first_name'].'"';
+				
+			echo DB::instance(DB_NAME)->select_field($q);
 		}
 		
-		/*  Demonstrating Classes/Objects */
+		
+		//========================================
+		//! /*  Demonstrating Classes/Objects */
+		//========================================
 		public function test1() {
 		
 			# access to class 
@@ -55,7 +74,10 @@ class practice_controller extends base_controller {
 		
 		}
 		
-		/*  Demonstrating Timestamp */
+		//==================================
+		//! /*  Demonstrating Timestamp */
+		//==================================
+
 		public function test2() {
 		
 			# Static - accessing the method directly. A class where its methods you use independently e.g. 				User
