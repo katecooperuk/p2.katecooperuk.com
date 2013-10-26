@@ -22,6 +22,7 @@ class users_controller extends base_controller {
     
     public function p_signup() {
     
+    	# Debugging
     	echo "<pre>";
     	print_r($_POST);
     	echo "<pre>";
