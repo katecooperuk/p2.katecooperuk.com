@@ -47,14 +47,41 @@ class users_controller extends base_controller {
     }
 
     public function login() {
-        echo "This is the login page";
+        
+        # Setup view
+        $this->template->content = View::instance('v_users_login');
+        $this->template->title   = "Login";
+
+		# Render template
+        echo $this->template;
+    }
+    
+    public function p_login() {
+	    
+	    $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+	    
+	    echo "<pre>";
+	    print_r($_POST);
+	    echo "<pre>";
+	    
+	    # Search the db for this email and password
+		# Retrieve the token if it's available
+		$q = 
+			'SELECT * 
+			FROM users 
+			WHERE email = "'.$_POST['email'].'" 
+			AND password = "'.$_POST['password'].'"';
+			
+			echo $q;
+	    
+	    //DB::instance(DB_NAME)->select_row($q);
     }
 
     public function logout() {
         echo "This is the logout page";
     }
 
-   public function profile($user_name = NULL) {
+	public function profile($user_name = NULL) {
     
     	# Set up the View
     	$this->template->content = View::instance('v_users_profile');
