@@ -75,6 +75,10 @@ class posts_controller extends base_controller {
 		
 	}
 	
+	/*-------------------------------
+	View Users
+	-------------------------------*/
+	
 	public function users(){
 		
 		# Set up view
@@ -95,7 +99,7 @@ class posts_controller extends base_controller {
 		# Run Query
 		$connections = DB::instance(DB_NAME)->select_array($q,'user_id_followed');
 		
-		print_r($connections);
+		//print_r($connections);
 		
 		# Pass $users array to the view
 		$this->template->content->users       = $users;
@@ -103,6 +107,42 @@ class posts_controller extends base_controller {
 		
 		# Render view
 		echo $this->template;
+	}
+	
+	/*------------------------------------------------------------------------------------
+	Follow - creates row in users_users table representing one user is following another
+	------------------------------------------------------------------------------------*/
+	
+	public function follow($user_id_followed) {
+
+    	# Prepare the data array to be inserted
+		$data = Array(
+        "created" => Time::now(),
+        "user_id" => $this->user->user_id,
+        "user_id_followed" => $user_id_followed
+        );
+
+		# Do the insert
+		DB::instance(DB_NAME)->insert('users_users', $data);
+
+		# Send them back
+		Router::redirect("/posts/users");
+
+	}
+	
+	/*------------------------------------------------------------------------------------
+	UnFollow - removes specified row in users_users table, removing 'follow' between users
+	------------------------------------------------------------------------------------*/
+
+	public function unfollow($user_id_followed) {
+
+    	# Delete this connection
+		$where_condition = 'WHERE user_id = '.$this->user->user_id.' AND user_id_followed = '.$user_id_followed;
+		DB::instance(DB_NAME)->delete('users_users', $where_condition);
+
+		# Send them back
+		Router::redirect("/posts/users");
+
 	}
 	
 } #eoc
