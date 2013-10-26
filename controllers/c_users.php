@@ -26,6 +26,8 @@ class users_controller extends base_controller {
     	echo "<pre>";
     	print_r($_POST);
     	echo "<pre>";
+    	
+    	DB::instance(DB_NAME)->insert_row('users', $_POST);
 	    
     }
 
