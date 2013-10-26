@@ -60,21 +60,33 @@ class users_controller extends base_controller {
 	    
 	    $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 	    
-	    echo "<pre>";
-	    print_r($_POST);
-	    echo "<pre>";
-	    
 	    # Search the db for this email and password
 		# Retrieve the token if it's available
 		$q = 
-			'SELECT * 
+			'SELECT token
 			FROM users 
 			WHERE email = "'.$_POST['email'].'" 
 			AND password = "'.$_POST['password'].'"';
 			
-			echo $q;
+			//echo $q;
 	    
-	    //DB::instance(DB_NAME)->select_row($q);
+	    $token = DB::instance(DB_NAME)->select_field($q);
+	    
+	    # Success
+	    if($token) {
+	    	setcookie('token', $token, strtotime('+1 year'), '/');
+	    	echo "You are logged in!";
+		    
+	    }
+	    #Fail
+	    else {
+	    	echo "Login failed!";
+		    
+	    }
+	    
+	    echo "<pre>";
+	    print_r($_POST);
+	    echo "<pre>";
     }
 
     public function logout() {
