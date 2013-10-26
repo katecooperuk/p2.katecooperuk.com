@@ -12,7 +12,20 @@ class users_controller extends base_controller {
     }
 
     public function signup() {
-        echo "This is the signup page";
+        
+        #Set up the view
+        $this->template->content = View::instance('v_users_signup');
+        
+        # Render the view (localhost/users/signup)
+        echo $this->template;
+    }
+    
+    public function p_signup() {
+    
+    	echo "<pre>";
+    	print_r($_POST);
+    	echo "<pre>";
+	    
     }
 
     public function login() {
