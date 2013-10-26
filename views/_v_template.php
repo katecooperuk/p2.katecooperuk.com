@@ -14,6 +14,10 @@
 
 <body>	
 
+	<!-- Links -->
+	<a href='/users/signup'>Sign Up</a><br>
+	<a href='/users/login'>Login</a><br>
+
 	<?php if(isset($content)) echo $content; ?>
 
 	<?php if(isset($client_files_body)) echo $client_files_body; ?>
