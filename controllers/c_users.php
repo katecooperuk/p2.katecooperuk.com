@@ -15,20 +15,35 @@ class users_controller extends base_controller {
         
         #Set up the view
         $this->template->content = View::instance('v_users_signup');
+        $this->template->title = "Sign Up";
         
         # Render the view (localhost/users/signup)
         echo $this->template;
     }
     
     public function p_signup() {
-    
-    	# Debugging
-    	echo "<pre>";
-    	print_r($_POST);
-    	echo "<pre>";
+        	
+    	# More data we want stored with the user
+    	$_POST['created'] = Time::now();
+    	$_POST['modified'] = Time::now();
     	
-    	DB::instance(DB_NAME)->insert_row('users', $_POST);
-	    
+    	# Encrypt password
+    	$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+    	
+    	# Create encrypted token via email and random string
+    	$_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
+    	
+    	# Insert this user into the database
+    	$user_id = DB::instance(DB_NAME)->insert('users', $_POST);
+    	
+    	# Debugging - results of POST
+    	//echo "<pre>";
+    	//print_r($_POST);
+    	//echo "<pre>";
+    	
+    	# Send to the login page
+    	Router::redirect('/users/login');
+	
     }
 
     public function login() {
