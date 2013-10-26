@@ -124,43 +124,21 @@ class users_controller extends base_controller {
 
 }
 
-	public function profile($user_name = NULL) {
+	public function profile() {
     
-    	# Set up the View
+    	# If user is blank, they're not logged in; redirect to login page
+    	if(!$this->user) {
+	    	Router::redirect('/users/login');
+    	}    	
+    	
+    	# If they weren't redirected away, continue:
+    	
+    	# Setup view
     	$this->template->content = View::instance('v_users_profile');
-    	$this->template->title = "Profile";
+    	$this->template->title = "Profile of".$this->user->first_name;
     	
-    	# Define the Array for the Head
-    	$client_files_head = Array(
-    	'/css/profile.css',
-    	'/css/master.css'
-    	);
-    	
-    	# Load Client Files - Head
-    	$this->template->client_files_head = Utils::load_client_files($client_files_head);
-    	
-    	# Define the Array for the Body
-    	$client_files_body = Array(
-    	'/js/profile.js'
-    	);
-    	
-    	# Load Client Files - Body
-    	$this->template->client_files_body = Utils::load_client_files($client_files_body);
-    	    	
-    	# Pass the data to the view
-    	$this->template->content->user_name = $user_name;
-    	
-    	# Display the View
+    	# Render template
     	echo $this->template;
-    	
-    	# Create instance of view
-    	//$view = View::instance('v_users_profile');
-    	
-    	# View has access to $user_name
-    	//$view->user_name = $user_name;
-    	
-    	//echo $view;
-    	
     }    
     
 } # end of the class
