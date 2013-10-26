@@ -3,9 +3,16 @@
 class posts_controller extends base_controller {
 
 	public function __construct() {
+                
 		# Make sure the base controller construct gets called
-        parent::__construct();
-    } 
+		parent::__construct();
+                
+		# Only let logged in users access the methods in this controller
+		if(!$this->user) {
+			die("Members only");
+		}
+                
+    }  
 
 	/*-------------------------------
 	Display New Post Form
@@ -30,6 +37,8 @@ class posts_controller extends base_controller {
 		
 		DB::instance(DB_NAME)->insert('posts',$_POST);
 		
+		Router::redirect('/posts/');
+		
 	}
 
 	/*-------------------------------
@@ -42,12 +51,18 @@ class posts_controller extends base_controller {
 		
 		# Set up Query
 		$q = 'SELECT 
-					posts.*,
+					posts.content,
+					posts.created,
+					posts.user_id AS post_user_id,
+					users_users.user_id AS follower_id,
 					users.first_name,
 					users.last_name
 				FROM posts
-				INNER JOIN users				
-					ON posts.user_id = users.user_id';
+				INNER JOIN users_users 
+					ON posts.user_id = users_users.user_id_followed
+				INNER JOIN users 
+					ON posts.user_id = users.user_id
+				WHERE users_users.user_id = '.$this->user->user_id;
 							
 		# Run Query
 		$posts = DB::instance(DB_NAME)->select_rows($q);
@@ -65,15 +80,26 @@ class posts_controller extends base_controller {
 		# Set up view
 	 	$this->template->content = View::instance('v_posts_users');
 		
-		# Set up Query
+		# Set up Query - All users
 		$q = 'SELECT *
 				FROM users';
 			
 		# Run Query
 		$users = DB::instance(DB_NAME)->select_rows($q);
 		
+		# Set up Query - Connections from users_users table
+		$q = 'SELECT *
+				FROM users_users
+				WHERE user_id = '.$this->user->user_id;
+				
+		# Run Query
+		$connections = DB::instance(DB_NAME)->select_array($q,'user_id_followed');
+		
+		print_r($connections);
+		
 		# Pass $users array to the view
-		$this->template->content->users = $users;
+		$this->template->content->users       = $users;
+		$this->template->content->connections = $connections;
 		
 		# Render view
 		echo $this->template;
