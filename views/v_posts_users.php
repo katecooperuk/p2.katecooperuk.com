@@ -1,4 +1,5 @@
 <div class="content">
+	
 	<?php foreach($users as $user): ?>
 
 		<div id="name"><?=$user['first_name']?> <?=$user['last_name']?></div>
@@ -11,4 +12,5 @@
 		<br><br>
 
 	<?php endforeach ?>
+	
 </div>
