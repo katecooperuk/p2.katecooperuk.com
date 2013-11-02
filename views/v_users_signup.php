@@ -1,4 +1,5 @@
 <div class="formcontent">
+
 	<h2>Sign Up</h2>
 
 		<form method='POST' action='/users/p_signup'>
