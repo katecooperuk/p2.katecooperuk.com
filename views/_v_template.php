@@ -22,6 +22,7 @@
 	<div id="pagewrapper">
 		<!-- Masthead -->
 		<header>ChatterBox</header>
+		<!-- End Masthead -->
 	
 		<!-- Navigation Links -->
 		<nav>
@@ -44,12 +45,13 @@
 			
 			</menu>
 		</nav>
+		<!-- End Navigation Links -->
 	
 			<?php if($user): ?>
 				You are logged in as <?=$user->first_name?> <?=$user->last_name?><br>
 			<?php endif; ?>
 	
-			<br><br>
+			<br>
 
 			<?php if(isset($content)) echo $content; ?>
 
