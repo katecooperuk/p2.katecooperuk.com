@@ -1,1 +1,5 @@
-<h1>This is the profile of <?=$user->first_name?></h1>
+<div class="content">
+	
+	<h2>This is <?=$user->first_name?>'s Profile</h2>
+
+</div>
