@@ -2,9 +2,10 @@
 	
 	<?php foreach($posts as $post): ?>
 
-		<strong><?=$post['first_name']?> posted:</strong><br>
-		<?=$post['content']?><br>
-		<i><?=Time::display($post['created'])?></i><br><br>
+		<div id="name"><?=$post['first_name']?></div>
+		<div id="post"><?=$post['content']?></div>
+		<div id="time"><?=Time::display($post['created'])?></div>
+		<br><br>
 	
 	<?php endforeach; ?>
 		
