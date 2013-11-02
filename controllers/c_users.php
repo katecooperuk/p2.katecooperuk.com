@@ -30,27 +30,44 @@ class users_controller extends base_controller {
 
     public function p_signup() {
     
-		# More data we want stored with the user
-    	$_POST['created'] = Time::now();
-    	$_POST['modified'] = Time::now();
+    	# Set up Email / Password Query
+    	$q = 'SELECT * FROM users WHERE email = "'.$_POST['email'].'"';
     	
-    	# Encrypt password
-    	$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+    	# Query Database
+    	$user_exists = DB::instance(DB_NAME)->select_rows($q);
     	
-    	# Create encrypted token via email and random string
-    	$_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
+    	# Check if email exists in database
+    		if($q($user_exists)>1){
+    		
+    			echo "User already exists";
+    		
+    			# Send to Login page
+	    		Router::redirect('/users/login');
+    		}
+    		
+    		else {
+	    		# More data we want stored with the user
+				$_POST['created'] = Time::now();
+				$_POST['modified'] = Time::now();
     	
-    	# Insert this user into the database
-    	$user_id = DB::instance(DB_NAME)->insert('users', $_POST);
+				# Encrypt password
+				$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
     	
-    	# Debugging - results of POST
-    	//echo "<pre>";
-    	//print_r($_POST);
-    	//echo "<pre>";
+				# Create encrypted token via email and random string
+				$_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
     	
-    	# Send to the login page
-    	Router::redirect('/users/login');
-	
+				# Insert this user into the database
+				$user_id = DB::instance(DB_NAME)->insert('users', $_POST);
+    	
+				# Debugging - results of POST
+				//echo "<pre>";
+				//print_r($_POST);
+				//echo "<pre>";
+    	
+				# Send to the login page
+				Router::redirect('/users/login');
+    		}
+  
     }
     
     /*-------------------------------------------------------------------------------------------------
