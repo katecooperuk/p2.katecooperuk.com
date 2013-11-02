@@ -4,6 +4,6 @@
 	
 <?php else: ?>
 
-	Welcome to my app.  Please sign up or log in
+	Welcome to ChatterBox.  Please sign up or log in
 	
 <?php endif; ?>
