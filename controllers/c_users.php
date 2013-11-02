@@ -31,15 +31,13 @@ class users_controller extends base_controller {
     public function p_signup() {
     
     	# Set up Email / Password Query
-    	$q = 'SELECT * FROM users WHERE email = "'.$_POST['email'].'"';
+    	$q = "SELECT * FROM users WHERE email = '".$_POST['email']."'"; 
     	
     	# Query Database
     	$user_exists = DB::instance(DB_NAME)->select_rows($q);
     	
     	# Check if email exists in database
-    		if($q($user_exists)>1){
-    		
-    			echo "User already exists";
+    		if(!empty($user_exists)){
     		
     			# Send to Login page
 	    		Router::redirect('/users/login');
