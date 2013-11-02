@@ -1,8 +1,6 @@
 <?php
 class users_controller extends base_controller {
 
-	#Testing localhost/users/signup
-
     public function __construct() {
         parent::__construct();
     } 
@@ -10,6 +8,11 @@ class users_controller extends base_controller {
     public function index() {
         echo "This is the index page";
     }
+
+
+	/*-------------------------------------------------------------------------------------------------
+	Signup Function
+	-------------------------------------------------------------------------------------------------*/
 
     public function signup() {
         
@@ -21,9 +24,13 @@ class users_controller extends base_controller {
         echo $this->template;
     }
     
+    /*-------------------------------------------------------------------------------------------------
+	Process Signup Function
+	-------------------------------------------------------------------------------------------------*/
+
     public function p_signup() {
-        	
-    	# More data we want stored with the user
+    
+		# More data we want stored with the user
     	$_POST['created'] = Time::now();
     	$_POST['modified'] = Time::now();
     	
@@ -45,6 +52,10 @@ class users_controller extends base_controller {
     	Router::redirect('/users/login');
 	
     }
+    
+    /*-------------------------------------------------------------------------------------------------
+	Login Function
+	-------------------------------------------------------------------------------------------------*/
 
     public function login() {
         
@@ -56,6 +67,10 @@ class users_controller extends base_controller {
         echo $this->template;
     }
     
+    /*-------------------------------------------------------------------------------------------------
+	Process Login Function
+	-------------------------------------------------------------------------------------------------*/
+
     public function p_login() {
 	    
 	    # Compare password to database
@@ -92,6 +107,10 @@ class users_controller extends base_controller {
 	    
     }
 
+	/*-------------------------------------------------------------------------------------------------
+	Logout Function
+	-------------------------------------------------------------------------------------------------*/
+
     public function logout() {
 
     	# Generate and save a new token for next login
@@ -112,11 +131,15 @@ class users_controller extends base_controller {
 
 }
 
+	/*-------------------------------------------------------------------------------------------------
+	Profile Function
+	-------------------------------------------------------------------------------------------------*/
+
 	public function profile() {
     
     	# If user is blank, they're not logged in; redirect to login page
     	if(!$this->user) {
-	    	//Router::redirect('/users/login');
+	    	Router::redirect('/users/login');
 	    	die('Members Only. <a href="/users/login">Login</a>');
     	}    	
     	
@@ -130,4 +153,4 @@ class users_controller extends base_controller {
     	echo $this->template;
     }    
     
-} # end of the class
+} # end of class
