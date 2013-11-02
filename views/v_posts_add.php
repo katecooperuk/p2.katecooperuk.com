@@ -1,4 +1,4 @@
-<div class="formbox">
+<div class="formcontent">
 
 	<h2>ChatterBox Post</h2>
 
