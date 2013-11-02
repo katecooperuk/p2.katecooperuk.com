@@ -7,7 +7,7 @@
 		<textarea name='content' rows="5"></textarea>
 		<br><br>
 		
-		<input type='Submit' value='Add new post'>
+		<input type='Submit' value='Chatter'>
 		
 	</form>
 	
