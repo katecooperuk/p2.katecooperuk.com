@@ -3,11 +3,13 @@
 <head>
 	<title><?php if(isset($title)) echo $title; ?></title>
 
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
-	<script src='jquery.js'></script>
-					
+	<!-- JS/CSS File we want on every page -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		
 	<!-- Controller Specific JS/CSS -->
+	<link rel="stylesheet" href="/css/sample-app.css" type="text/css">
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
 	
 </head>
