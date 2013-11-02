@@ -51,14 +51,14 @@ menu li {
 	display:inline;
 }
 
-a:link
+a:link,
 a:visited {
 	padding-right:10px;
 	color:#c4e8ff;
 	text-decoration:none;
 }
 
-a:hover
+a:hover,
 a:active {
 	padding-right:10px;
 	color:#64a2ea;
