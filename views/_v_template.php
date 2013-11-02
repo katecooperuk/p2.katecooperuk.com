@@ -12,7 +12,7 @@
     <link href='http://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
 		
 	<!-- Controller Specific JS/CSS -->
-	<link rel="stylesheet" href="/css/sample-app.css" type="text/css">
+	<link rel="stylesheet" href="/css/chatterbox.css" type="text/css">
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
 	
 </head>
