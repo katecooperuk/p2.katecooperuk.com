@@ -26,7 +26,7 @@ h2 {
 /* Main Site Navigation */
 nav {
 	font-family: 'Muli', sans-serif;
-	font-size: 16pt;
+	font-size: 14pt;
 	color: #7750cb;
 }
 
@@ -36,7 +36,7 @@ ul li {
 }
 
 menu {
-	width: auto;
+	width: 600px;
 	padding: 10px;
 	background-color: #465d79;
 	border:1px solid #c4e8ff;
@@ -65,9 +65,27 @@ a:active {
 	text-decoration: none;
 }
 
-/* Form Box */
-.formbox {
-	width: 400px;
+/* Text */
+
+#name {
+	color:#7750cb;
+}
+
+#post {
+	color:#2a394d;
+	
+}
+
+#time {
+	color: #6e8097;
+	font-size: 70%;
+	font-style: italic;
+}
+
+/* Form Content */
+
+.formcontent {
+	width: 600px;
 	padding: 20px;
 	background-color: #c4e8ff;
 	background-image: url(../images/CB_logo.gif);
@@ -75,4 +93,20 @@ a:active {
 	background-position:right;
 	
 	
+}
+
+/* Content */
+
+.content {
+	width: 600px;
+	padding: 20px;
+	background-color: #c4e8ff;
+}
+
+.content a {
+	color: #479cd1;
+}
+
+.content a:hover {
+	color: #007cef
 }
