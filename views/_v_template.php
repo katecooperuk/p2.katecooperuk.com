@@ -7,6 +7,9 @@
 	
 	<!-- JS/CSS File we want on every page -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
+    <!-- Google Font Link -->
+    <link href='http://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
 		
 	<!-- Controller Specific JS/CSS -->
 	<link rel="stylesheet" href="/css/sample-app.css" type="text/css">
