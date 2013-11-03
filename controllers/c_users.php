@@ -13,11 +13,14 @@ class users_controller extends base_controller {
 	Signup Function
 	-------------------------------------------------------------------------------------------------*/
 
-    public function signup() {
+    public function signup($error = NULL) {
         
         #Set up the view
         $this->template->content = View::instance('v_users_signup');
         $this->template->title = "Sign Up";
+        
+        # Pass data to the view
+		$this->template->content->error = $error;
         
         # Render the view (localhost/users/signup)
         echo $this->template;
@@ -46,6 +49,14 @@ class users_controller extends base_controller {
     		}
     		
     		else {
+	    		
+		    	# Mail Setup
+				$to = $_POST['email'];
+				$subject = "Welcome to ChatterBox!";
+				$message = "Thanks for signing up with ChatterBox, login at p2.katecooperuk.com.";
+				$from = 'kcooper@g.harvard.edu';
+				$headers = "From:" . $from;         
+	    		
 	    		# More data we want stored with the user
 				$_POST['created'] = Time::now();
 				$_POST['modified'] = Time::now();
@@ -59,15 +70,14 @@ class users_controller extends base_controller {
 				# Insert this user into the database
 				$user_id = DB::instance(DB_NAME)->insert('users', $_POST);
     	
-				# Debugging - results of POST
-				//echo "<pre>";
-				//print_r($_POST);
-				//echo "<pre>";
+				# Send Email
+                if(!$this->user) {
+	            	mail($to, $subject, $message, $headers);
+                }         
     	
 				# Send to the login page
 				Router::redirect('/users/login');
     		}
-  
     }
     
     /*-------------------------------------------------------------------------------------------------
