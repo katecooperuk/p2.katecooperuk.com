@@ -21,6 +21,12 @@
 			<br><br>
 	
 			<input type='submit' value='Sign Up'>
+			
+			<?php if(isset($error)): ?>
+				<div class='error'>
+					This email is already in use. Login in?
+				</div>
+			<?php endif; ?>
 
 		</form>
 </div>
