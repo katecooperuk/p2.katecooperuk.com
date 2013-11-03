@@ -1,7 +1,7 @@
 <div class="content">
 	
 	<h2><?=$user->first_name?>'s Profile</h2>
-	<img src="<?=$user->avatar; ?>">
+	<img src="<?=$user->avatar; ?>" class='profile'>
 	
 	<form method='POST' action="/users/picture/" enctype="multipart/form-data" >
     	<input type='file' accept='image' name='avatar'><br>
