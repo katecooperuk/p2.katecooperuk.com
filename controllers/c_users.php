@@ -75,11 +75,14 @@ class users_controller extends base_controller {
 	Login Function
 	-------------------------------------------------------------------------------------------------*/
 
-    public function login() {
+    public function login($error = NULL) {
         
         # Setup view
         $this->template->content = View::instance('v_users_login');
         $this->template->title   = "Login";
+        
+        # Pass data to the view
+		$this->template->content->error = $error;
 
 		# Render template
         echo $this->template;
@@ -106,27 +109,21 @@ class users_controller extends base_controller {
 	    # If there was, this will return the token
 	    $token = DB::instance(DB_NAME)->select_field($q);
 	    
-	    # Success
-	    if($token) {
-	    	
-	    	# Don't echo anything to the page before setting this cookie!
-	    	setcookie('token', $token, strtotime('+1 year'), '/');
-	    	
-	    	# Send to Homepage
-	    	Router::redirect('/');
-		    
-	    }
-	    # Fail
-	    else {
-	    
-			//echo "Login failed! <a href='/users/login'>Try again?</a>";
-			# Send to Homepage
-	    	Router::redirect('/users/login');
-		    
-	    }
-	    
+	    # Login failed
+		if(!$token) {
+        
+			 # Note the addition of the parameter "error"
+			 Router::redirect("/users/login/error"); 
+		}
+    
+		# Login passed
+		else {
+        	setcookie("token", $token, strtotime('+2 weeks'), '/');
+			Router::redirect("/");
+		}
     }
-
+	    
+	    
 	/*-------------------------------------------------------------------------------------------------
 	Logout Function
 	-------------------------------------------------------------------------------------------------*/
@@ -155,7 +152,7 @@ class users_controller extends base_controller {
 	Profile Function
 	-------------------------------------------------------------------------------------------------*/
 
-	public function profile() {
+	public function profile($error = NULL) {
     
     	# If user is blank, they're not logged in; redirect to login page
     	if(!$this->user) {
@@ -217,5 +214,50 @@ class users_controller extends base_controller {
         # Send to Profile Page
         Router::redirect('/users/profile'); 
     }  
+    
+    /*-------------------------------
+	Delete Profile
+	-------------------------------*/
+	
+	public function deleteprofile($error = NULL) {
+		
+		# Setup view
+        $this->template->content = View::instance('v_users_deleteprofile');
+        $this->template->title   = "Delete Profile";
+
+		# Render template
+        echo $this->template;	
+	}
+	
+	/*-------------------------------
+	Process Delete Account
+	-------------------------------*/
+	
+	public function p_deleteprofile() {
+		
+		# Sanitize Data entry
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+		
+		# Compare Password
+		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+		
+		$q = "SELECT token 
+                FROM users 
+                WHERE email = '".$this->user->email."' 
+                AND password = '".$_POST['password']."'";
+
+            $token = DB::instance(DB_NAME)->select_field($q);
+            if (!$token) {
+                $error = 'InvalidPassword';
+            }
+            else {
+                # all checks passed, now cleanup the DB from this user
+                # only need to delete the user and rely on the FK cascade
+                # to delete the posts and connection to other users (users_users)
+                $w = 'WHERE user_id = '.$this->user->user_id;
+                DB::instance(DB_NAME)->delete('users', $w);
+            }
+		
+	}
 	  
   } # end of class
