@@ -101,6 +101,7 @@ a:active {
 	background-image:url(../images/CB_logo.gif);
 	background-repeat:no-repeat;
 	background-position:right;
+	border:1px solid #7750cb;
 }
 
 #textbox {
@@ -120,12 +121,14 @@ a:active {
 	background-image:url(../images/CB_logo.gif);
 	background-repeat:no-repeat;
 	background-position:right;
+	border:1px solid #7750cb;
 }
 
 .content {
 	width:580px;
 	padding:20px;
 	background-color:#c4e8ff;
+	border:1px solid #7750cb;
 }
 
 .content a {
