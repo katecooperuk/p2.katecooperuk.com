@@ -53,7 +53,7 @@ class users_controller extends base_controller {
 		    	# Mail Setup
 				$to = $_POST['email'];
 				$subject = "Welcome to ChatterBox!";
-				$message = "Thanks for signing up with ChatterBox, login at p2.katecooperuk.com.";
+				$message = "Thanks for signing up with ChatterBox, login at p2.katecooperuk.com and start chattering.";
 				$from = 'kcooper@g.harvard.edu';
 				$headers = "From:" . $from;         
 	    		
