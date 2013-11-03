@@ -131,3 +131,14 @@ a:active {
 .content a:hover {
 	color:#007cef;
 }
+
+/* Images */
+img.profile {
+	width:150px;
+	height:150px;
+}
+
+img.posts {
+	width:80px;
+	height:80px;
+}
