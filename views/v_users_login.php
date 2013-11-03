@@ -1,6 +1,4 @@
 <div class="formcontent">
-
-	<h2><?php if(isset($user_exists)) echo 'This user already exists, please log in.'; ?><h2>
 	
 	<h2>LOG IN</h2>
 
@@ -16,6 +14,14 @@
 
 			<br><br>
 
+			<?php if(isset($error)): ?>
+				<div class='error'>
+					Login failed.<br>
+					Please double check your email and password.
+				</div>
+				<br>
+			<?php endif; ?>
+			
 			<input type='submit' value='Log in'>
 
 		</form>
