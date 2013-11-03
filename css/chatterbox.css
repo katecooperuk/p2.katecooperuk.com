@@ -82,6 +82,12 @@ a:active {
 	font-style:italic;
 }
 
+#welcome {
+	font-size:120%;
+	padding:50px 0 50px 10px;
+	
+}
+
 /* Content Boxes */
 
 .formcontent {
@@ -95,11 +101,21 @@ a:active {
 
 #textbox {
 	width:350px;
-	height:80px;
+	height:60px;
 	border:2px solid #007cef;
 	padding:5px;
 	font-size:11pt;
 	color:#007cef;
+}
+
+.content-home{
+	width:580px;
+	height:200px;
+	padding:20px;
+	background-color:#c4e8ff;
+	background-image:url(../images/CB_logo.gif);
+	background-repeat:no-repeat;
+	background-position:right;
 }
 
 .content {
