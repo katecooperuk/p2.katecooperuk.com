@@ -161,21 +161,17 @@ class users_controller extends base_controller {
     	if(!$this->user) {
 	    	Router::redirect('/users/login');
     	}    	
-    	
-    	# If they weren't redirected away, continue:
-    	
+
     	# Setup view
     	$this->template->content = View::instance('v_users_profile');
     	$this->template->title = "Profile of".$this->user->first_name;
     	
-    	# Query Load posts from user
+    	# Query load posts from user
     	$q = 'SELECT * FROM posts WHERE user_id = '.$this->user->user_id;
     	
     	# Run Query
     	$posts = DB::instance(DB_NAME)->select_rows($q);
     	$this->template->content->posts = $posts;
-    	
-
     	
     	# Render template
     	echo $this->template;
@@ -208,7 +204,7 @@ class users_controller extends base_controller {
 
                 # Resize and Save Image
                 $imageObj = new Image($_SERVER['DOCUMENT_ROOT'].'/uploads/avatars/'.$avatar);
-                $imageObj->resize(200,200);
+                $imageObj->resize(150,150);
             }
         }
         
