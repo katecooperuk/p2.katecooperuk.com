@@ -4,7 +4,7 @@
 
 	<form method='POST' action='/posts/p_add'>
 
-		<textarea name='content' rows="5"></textarea>
+		<textarea name='content' id='textbox'></textarea>
 		<br><br>
 		
 		<input type='Submit' value='Chatter'>
