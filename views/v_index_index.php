@@ -1,8 +1,12 @@
 <div class="content">
 
-	<?php if($user): ?>
+	<?php if($user): 
+		
+		# Send to Profile Page
+		Router::redirect('/users/profile');
+	?>
 	
-		Hello <?=$user->first_name;?>, welcome back to ChatterBox!
+		
 	
 	<?php else: ?>
 
