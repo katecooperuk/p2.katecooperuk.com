@@ -68,7 +68,7 @@
 		<footer>
 			<p class="footer">Kate Cooper - CSCI E15: Dynamic Web Applications - Project 2<br>
 				+1 Feature - upload an avatar image, display image in profile page and posts<br>
-				+1 Feature -
+				+1 Feature - welcome email sent to all new users after signing up successfully
 			</p>
 			<p>
 				<a href="http://validator.w3.org/check?uri=http%3A%2F%2Fp2.katecooperuk.com%2F">
