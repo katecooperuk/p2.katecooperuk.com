@@ -91,8 +91,15 @@ a:active {
 	background-image:url(../images/CB_logo.gif);
 	background-repeat:no-repeat;
 	background-position:right;
-	
-	
+}
+
+#textbox {
+	width:350px;
+	height:80px;
+	border:2px solid #007cef;
+	padding:5px;
+	font-size:11pt;
+	color:#007cef;
 }
 
 .content {
