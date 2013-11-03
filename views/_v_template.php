@@ -19,7 +19,9 @@
 
 <body>	
 
+	<!-- Page Wrapper -->
 	<div id="pagewrapper">
+	
 		<!-- Masthead -->
 		<header>ChatterBox</header>
 		<!-- End Masthead -->
@@ -48,6 +50,7 @@
 		</nav>
 		<!-- End Navigation Links -->
 	
+		<!-- Page Content -->
 			<?php if($user): ?>
 				You are logged in as <?=$user->first_name?> <?=$user->last_name?><br>
 			<?php endif; ?>
@@ -59,8 +62,27 @@
 			<?php if(isset($client_files_body)) echo $client_files_body; ?>
 			
 			<?php if(isset($client_files_head)) echo $client_files_head; ?>
-	
+		<!-- End Page Content -->
+		
+		<!-- Footer -->
+		<footer>
+			<p class="footer">Kate Cooper - CSCI E15: Dynamic Web Applications - Project 2<br>
+				+1 Feature - upload an avatar image, display image in profile page and posts<br>
+				+1 Feature -
+			</p>
+			<p>
+				<a href="http://validator.w3.org/check?uri=referer">
+				<img style="border:0; width:32px; height:32px" src="images/HTML5_Logo_32.png" alt="Valid HTML5!">
+				</a>
+				<a href="http://jigsaw.w3.org/css-validator/check/referer">
+				<img style="border:0; width:88px; height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" 						alt="Valid CSS!">
+				</a>
+			</p>
+		</footer>
+		<!-- End Footer -->
+		
 	</div>
+	<!-- End Page Wrapper -->
 	
 </body>
 </html>
