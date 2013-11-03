@@ -71,11 +71,11 @@
 				+1 Feature -
 			</p>
 			<p>
-				<a href="http://validator.w3.org/check?uri=referer">
-				<img style="border:0; width:32px; height:32px" src="images/HTML5_Logo_32.png" alt="Valid HTML5!">
+				<a href="http://validator.w3.org/check?uri=http%3A%2F%2Fp2.katecooperuk.com%2F">
+				<img style="border:0; width:32px; height:32px" src="http://www.w3.org/html/logo/badge/html5-badge-h-solo.png" alt="Valid HTML5!" width="63" height="64" alt="HTML5 Powered" title="HTML5 Powered">
 				</a>
 				<a href="http://jigsaw.w3.org/css-validator/check/referer">
-				<img style="border:0; width:88px; height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" 						alt="Valid CSS!">
+				<img style="border:0; width:88px; height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS!">
 				</a>
 			</p>
 		</footer>
