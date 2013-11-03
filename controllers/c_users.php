@@ -9,7 +9,6 @@ class users_controller extends base_controller {
         echo "This is the index page";
     }
 
-
 	/*-------------------------------------------------------------------------------------------------
 	Signup Function
 	-------------------------------------------------------------------------------------------------*/
@@ -123,7 +122,6 @@ class users_controller extends base_controller {
 		}
     }
 	    
-	    
 	/*-------------------------------------------------------------------------------------------------
 	Logout Function
 	-------------------------------------------------------------------------------------------------*/
@@ -145,8 +143,7 @@ class users_controller extends base_controller {
 
 		# Send them back to the main index.
 		Router::redirect('/');
-
-}
+	}
 
 	/*-------------------------------------------------------------------------------------------------
 	Profile Function
@@ -166,6 +163,7 @@ class users_controller extends base_controller {
     	# Query load posts from user
     	$q = 'SELECT * FROM posts WHERE user_id = '.$this->user->user_id;
     	
+    	
     	# Run Query
     	$posts = DB::instance(DB_NAME)->select_rows($q);
     	$this->template->content->posts = $posts;
@@ -174,16 +172,14 @@ class users_controller extends base_controller {
     	echo $this->template;
     }  
     
+	/*-------------------------------------------------------------------------------------------------
+	Process Image Upload
+	-------------------------------------------------------------------------------------------------*/
 	
-	/*-------------------------------
-	Process Image Uploads
-	-------------------------------*/
-	
-	public function picture() {
+	public function picture($error = NULL) {
 	
         # Upload Image
         if ($_FILES['avatar']['error'] == 0) {
-            
             
             $avatar = Upload::upload($_FILES, "/uploads/avatars/", array('jpg', 'jpeg', 'gif', 'png'), $this->user->user_id);
 
@@ -215,49 +211,4 @@ class users_controller extends base_controller {
         Router::redirect('/users/profile'); 
     }  
     
-    /*-------------------------------
-	Delete Profile
-	-------------------------------*/
-	
-	public function deleteprofile($error = NULL) {
-		
-		# Setup view
-        $this->template->content = View::instance('v_users_deleteprofile');
-        $this->template->title   = "Delete Profile";
-
-		# Render template
-        echo $this->template;	
-	}
-	
-	/*-------------------------------
-	Process Delete Account
-	-------------------------------*/
-	
-	public function p_deleteprofile() {
-		
-		# Sanitize Data entry
-		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
-		
-		# Compare Password
-		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
-		
-		$q = "SELECT token 
-                FROM users 
-                WHERE email = '".$this->user->email."' 
-                AND password = '".$_POST['password']."'";
-
-            $token = DB::instance(DB_NAME)->select_field($q);
-            if (!$token) {
-                $error = 'InvalidPassword';
-            }
-            else {
-                # all checks passed, now cleanup the DB from this user
-                # only need to delete the user and rely on the FK cascade
-                # to delete the posts and connection to other users (users_users)
-                $w = 'WHERE user_id = '.$this->user->user_id;
-                DB::instance(DB_NAME)->delete('users', $w);
-            }
-		
-	}
-	  
-  } # end of class
+} # end of class
