@@ -1,7 +1,3 @@
-<?php if(isset($error)): ?>
-	<h2>There was a problem with your upload, please try again.</h2> 
-<?php endif; ?> 
-
 <div class="content">
 	
 	<h2><?=$user->first_name?>'s Profile</h2>
@@ -22,6 +18,11 @@
 	
 	<?php endforeach;?>  
 	
-	
+	<?php if(isset($error)): ?>
+        <div class='error'>
+            Image upload failed, please try again.
+        </div>
+        <br>
+    <?php endif; ?>
 
 </div>
