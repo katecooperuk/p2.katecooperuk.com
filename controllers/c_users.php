@@ -30,6 +30,9 @@ class users_controller extends base_controller {
 
     public function p_signup() {
     
+    	# Sanitize Data Entry
+    	$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+    
     	# Set up Email / Password Query
     	$q = "SELECT * FROM users WHERE email = '".$_POST['email']."'"; 
     	
@@ -116,7 +119,9 @@ class users_controller extends base_controller {
 	    # Fail
 	    else {
 	    
-			echo "Login failed! <a href='/users/login'>Try again?</a>";
+			//echo "Login failed! <a href='/users/login'>Try again?</a>";
+			# Send to Homepage
+	    	Router::redirect('/users/login');
 		    
 	    }
 	    
@@ -155,7 +160,6 @@ class users_controller extends base_controller {
     	# If user is blank, they're not logged in; redirect to login page
     	if(!$this->user) {
 	    	Router::redirect('/users/login');
-	    	die('Members Only. <a href="/users/login">Login</a>');
     	}    	
     	
     	# If they weren't redirected away, continue:
@@ -164,8 +168,58 @@ class users_controller extends base_controller {
     	$this->template->content = View::instance('v_users_profile');
     	$this->template->title = "Profile of".$this->user->first_name;
     	
+    	# Query Load posts from user
+    	$q = 'SELECT * FROM posts WHERE user_id = '.$this->user->user_id;
+    	
+    	# Run Query
+    	$posts = DB::instance(DB_NAME)->select_rows($q);
+    	$this->template->content->posts = $posts;
+    	
+
+    	
     	# Render template
     	echo $this->template;
-    }    
+    }  
     
-} # end of class
+	
+	/*-------------------------------
+	Process Image Uploads
+	-------------------------------*/
+	
+	public function picture() {
+	
+        # Upload Image
+        if ($_FILES['avatar']['error'] == 0) {
+            
+            
+            $avatar = Upload::upload($_FILES, "/uploads/avatars/", array('jpg', 'jpeg', 'gif', 'png'), $this->user->user_id);
+
+            if($avatar == 'Invalid file type.') {
+                
+                # Error
+                Router::redirect("/users/profile/error"); 
+            }
+            
+            else {
+                
+                # Upload Image
+                $data = Array('avatar' => $avatar);
+                DB::instance(DB_NAME)->update('users', $data, 'WHERE user_id = '.$this->user->user_id);
+
+                # Resize and Save Image
+                $imageObj = new Image($_SERVER['DOCUMENT_ROOT'].'/uploads/avatars/'.$avatar);
+                $imageObj->resize(100,100);
+            }
+        }
+        
+        else {
+        
+            # Error
+            Router::redirect("/users/profile/error");  
+        }
+
+        # Send to Profile Page
+        Router::redirect('/users/profile'); 
+    }  
+	  
+  } # end of class
