@@ -210,5 +210,5 @@ class users_controller extends base_controller {
         # Send to Profile Page
         Router::redirect('/users/profile'); 
     }  
-    
+   	
 } # end of class
