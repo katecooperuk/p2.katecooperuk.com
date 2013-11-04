@@ -13,15 +13,21 @@
 			<input type='password' name='password'>
 
 			<br><br>
-
-			<?php if(isset($error)): ?>
-				<div class='error'>
-					Login failed.<br>
-					Please double check your email and password.
-				</div>
-				<br>
-			<?php endif; ?>
 			
+			<?php if($error && $error == 'user-exists'): ?>
+				<div class='error'>
+					This user already exists
+				</div>
+			<?php elseif(isset($error) && $error == 'blank-fields'): ?>
+				<div class='error'>
+					All fields need to be completed
+				</div>
+			<?php elseif(isset($error) && $error == 'invalid-login'): ?>
+				<div class='error'>
+					Invalid Login, please try again
+				</div>
+			<?php endif; ?>
+
 			<input type='submit' value='Log in'>
 
 		</form>
