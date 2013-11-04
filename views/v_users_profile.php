@@ -7,12 +7,12 @@
 	<form method='POST' action="/users/picture/" enctype="multipart/form-data" >
     	<input type='file' accept='image' name='avatar'><br>
     	
-    	<?php if(isset($error)): ?>
-        <div class='error'>
-            Image upload failed, please try again.
-        </div>
-        <br>
-    <?php endif; ?>
+    		<?php if(isset($error)): ?>
+				<div class='error'>
+					Image upload failed, please try again.
+				</div>
+				<br>
+			<?php endif; ?>
     	
 		<input type='submit' name='submit' value='Upload Avatar'>
 	</form>
@@ -26,6 +26,4 @@
 	
 	<?php endforeach;?>  
 	
-	
-
 </div>
