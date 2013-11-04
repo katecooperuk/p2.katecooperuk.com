@@ -202,8 +202,7 @@ class users_controller extends base_controller {
     
     /*-------------------------------------------------------------------------------------------------
 	Process Image Upload
-	-------------------------------------------------------------------------------------------------*/
-	
+	-------------------------------------------------------------------------------------------------*/   
 	public function picture($error = NULL) {
 	
 		# Sanitize Data Entry
@@ -241,5 +240,5 @@ class users_controller extends base_controller {
         # Send to Profile Page
         Router::redirect('/users/profile'); 
     }  
-     
+    	     
  } # end of class
