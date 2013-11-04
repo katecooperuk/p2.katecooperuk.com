@@ -41,13 +41,21 @@ class users_controller extends base_controller {
     	# Query Database
     	$user_exists = DB::instance(DB_NAME)->select_rows($q);
     	
-    	# Check if email exists in database
+    		# Check if email exists in database
     		if(!empty($user_exists)){
     		
     			# Send to Login page
     			# Pass error message along - to the login page - indicate 'user-exists' error
 	    		Router::redirect('/users/login/user-exists');
     		}
+    		
+    		# Check if fields are blank
+    		elseif(empty($_POST['email']['password'])) {
+			
+				# Send to Login page
+				# Pass error message along - to the login page - indicate 'user-exists' error
+				Router::redirect('/users/signup/blank-fields'); 
+			}
     		
     		else {
 	    		
@@ -127,7 +135,7 @@ class users_controller extends base_controller {
         
 			 # Note the addition of the parameter "error"
 			 Router::redirect('/users/login/invalid-login'); 
-		}
+		}	
     
 		# Login passed
 		else {
@@ -192,7 +200,7 @@ class users_controller extends base_controller {
     	echo $this->template;
     }  
     
-	/*-------------------------------------------------------------------------------------------------
+    /*-------------------------------------------------------------------------------------------------
 	Process Image Upload
 	-------------------------------------------------------------------------------------------------*/
 	
@@ -205,11 +213,11 @@ class users_controller extends base_controller {
         if ($_FILES['avatar']['error'] == 0) {
             
             $avatar = Upload::upload($_FILES, "/uploads/avatars/", array('jpg', 'jpeg', 'gif', 'png'), $this->user->user_id);
-
+ 
             if($avatar == 'Invalid file type.') {
                 
                 # Error
-                Router::redirect("/users/profile/error"); 
+                Router::redirect('/users/profile/error'); 
             }
             
             else {
@@ -217,7 +225,7 @@ class users_controller extends base_controller {
                 # Upload Image
                 $data = Array('avatar' => $avatar);
                 DB::instance(DB_NAME)->update('users', $data, 'WHERE user_id = '.$this->user->user_id);
-
+ 
                 # Resize and Save Image
                 $imageObj = new Image($_SERVER['DOCUMENT_ROOT'].'/uploads/avatars/'.$avatar);
                 $imageObj->resize(150,150);
@@ -229,9 +237,9 @@ class users_controller extends base_controller {
             # Error
             Router::redirect("/users/profile/error");  
         }
-
+ 
         # Send to Profile Page
         Router::redirect('/users/profile'); 
     }  
-   	
-} # end of class
+     
+ } # end of class
