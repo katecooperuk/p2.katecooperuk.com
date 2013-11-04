@@ -45,7 +45,8 @@ class users_controller extends base_controller {
     		if(!empty($user_exists)){
     		
     			# Send to Login page
-	    		Router::redirect('/users/login');
+    			# Pass error message along - to the login page - indicate 'user-exists' error
+	    		Router::redirect('/users/login/user-exists');
     		}
     		
     		else {
@@ -125,13 +126,13 @@ class users_controller extends base_controller {
 		if(!$token) {
         
 			 # Note the addition of the parameter "error"
-			 Router::redirect("/users/login/error"); 
+			 Router::redirect('/users/login/invalid-login'); 
 		}
     
 		# Login passed
 		else {
-        	setcookie("token", $token, strtotime('+2 weeks'), '/');
-			Router::redirect("/");
+        	setcookie('token', $token, strtotime('+2 weeks'), '/');
+			Router::redirect('/');
 		}
     }
 	    
