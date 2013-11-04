@@ -103,6 +103,9 @@ class users_controller extends base_controller {
 
     public function p_login() {
 	    
+	    # Sanitize Data Entry
+    	$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+	    
 	    # Compare password to database
 		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 	    
@@ -137,6 +140,9 @@ class users_controller extends base_controller {
 	-------------------------------------------------------------------------------------------------*/
 
     public function logout() {
+    
+    	# Sanitize Data Entry
+    	$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
     	# Generate and save a new token for next login
 		$new_token = sha1(TOKEN_SALT.$this->user->email.Utils::generate_random_string());
@@ -161,6 +167,9 @@ class users_controller extends base_controller {
 
 	public function profile($error = NULL) {
     
+    	# Sanitize Data Entry
+    	$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+    	
     	# If user is blank, they're not logged in; redirect to login page
     	if(!$this->user) {
 	    	Router::redirect('/users/login');
@@ -188,6 +197,9 @@ class users_controller extends base_controller {
 	
 	public function picture($error = NULL) {
 	
+		# Sanitize Data Entry
+    	$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+		
         # Upload Image
         if ($_FILES['avatar']['error'] == 0) {
             
