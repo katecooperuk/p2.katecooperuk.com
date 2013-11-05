@@ -5,8 +5,8 @@
 	<img src="<?=$user->avatar; ?>" class='profile'>
 	
 	<form method='POST' action="/users/picture/" enctype="multipart/form-data" >
-    	
-    	<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+	
+		<input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
     	<input type='file' accept='image' name='avatar'><br>
     	
     		<?php if(isset($error)): ?>
