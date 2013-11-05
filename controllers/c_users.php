@@ -228,7 +228,7 @@ class users_controller extends base_controller {
                 # Resize and Save Image
                 $imageObj = new Image($_SERVER['DOCUMENT_ROOT'].'/uploads/avatars/'.$avatar);
                 $imageObj->resize(150,150,'auto');
-                $imageObj->save_image($_SERVER['DOCUMENT_ROOT'].'/uploads/avatars/'.$avatar)
+                $imageObj->save_image($_SERVER['DOCUMENT_ROOT'].'/uploads/avatars/'.$avatar);
                 
                 # Just saw a notice about this on Piazza and renamed the Image.php file to Image-renamed.php
                 
