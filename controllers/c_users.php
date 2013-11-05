@@ -227,9 +227,10 @@ class users_controller extends base_controller {
  
                 # Resize and Save Image
                 $imageObj = new Image($_SERVER['DOCUMENT_ROOT'].'/uploads/avatars/'.$avatar);
-                $imageObj->resize(150,150);
+                $imageObj->resize(150,150,'auto');
+                $imageObj->save_image($_SERVER['DOCUMENT_ROOT'].'/uploads/avatars/'.$avatar)
                 
-                # N.B. - I couldn't get the resizing or imageObj save to work - when I left the line in it messed up the posts display on the v_user_profile.  I tried to replicate the login/p_login function, but couldn't get it to work so found this code on the PHP site and sort of cobbled it together.  I spent probably 24 hours on trying to make this element work properly and it just baffled me - any explanation would be greatly appreciated - thank you.
+                # Just saw a notice about this on Piazza and renamed the Image.php file to Image-renamed.php
                 
             }
         }
