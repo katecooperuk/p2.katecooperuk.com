@@ -203,7 +203,7 @@ class users_controller extends base_controller {
     /*-------------------------------------------------------------------------------------------------
 	Process Image Upload
 	-------------------------------------------------------------------------------------------------*/   
-	public function picture($error = NULL) {
+	public function picture() {
 	
 		# Sanitize Data Entry
     	$_POST = DB::instance(DB_NAME)->sanitize($_POST);
@@ -211,7 +211,7 @@ class users_controller extends base_controller {
         # Upload Image
         if ($_FILES['avatar']['error'] == 0) {
             
-            $avatar = Upload::upload($_FILES, "/uploads/avatars/", array('jpg', 'jpeg', 'gif', 'png'), $this->user->user_id);
+            $avatar = Upload::upload($_FILES, "/uploads/avatars/", array('jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'GIF', 'PNG'), $this->user->user_id);
  
             if($avatar == 'Invalid file type.') {
                 
@@ -230,7 +230,7 @@ class users_controller extends base_controller {
                 $imageObj->resize(150,150,'auto');
                 $imageObj->save_image($_SERVER['DOCUMENT_ROOT'].'/uploads/avatars/'.$avatar);
                 
-                # Just saw a notice about this on Piazza and renamed the Image.php file to Image-renamed.php
+                # Just saw a notice about this on Piazza and renamed the Image.php file to Image-renamed.php - Image resizing/saving 				now working
                 
             }
         }
